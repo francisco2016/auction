@@ -106,16 +106,13 @@ public class Auction
         }
         return noSubastado;
     }
-
+    
     /**
      * recibe como parámetro un entero que represente el número identificador de un item y elimina dicho item de
      * la colección de items.  -------------------------------------------------------------------------- 0062
      * No se puede asumir que un item n estará en la posición n-1 por la posibilidad de que haya borrado de elementos. 
      * Este método debe devolver el elemento eliminado o null en caso de que dicho elemento no exista.
-     * --------------------------------------------------------------------------------------------------  0062
-     */
-    /**
-     * Metodo que eliminara un objeto de la subasta
+     * -------------------------------------------------------------------------------------------------------- 0062
      */
     public Lot removeLot(int number){
         Lot lot = getLot(number);
@@ -124,36 +121,8 @@ public class Auction
         }
         return lot;
     }
-   
 
-//     /**
-//      * Return the lot with the given number. Return null
-//      * if a lot with this number does not exist.
-//      * @param lotNumber The number of the lot to return.
-//      */
-//     public Lot getLot(int lotNumber)
-//     {
-//         if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
-//             // The number seems to be reasonable.-------------------El número parece ser razonable
-//             Lot selectedLot = lots.get(lotNumber - 1);
-//             // Include a confidence check to be sure we have the
-//             // right lot.
-//             if(selectedLot.getNumber() != lotNumber) {
-//                 System.out.println("Internal error: Lot number " +
-//                     selectedLot.getNumber() +
-//                     " was returned instead of " +
-//                     lotNumber);
-//                 // Don't return an invalid lot.
-//                 selectedLot = null;
-//             }
-//             return selectedLot;
-//         }
-//         else {
-//             System.out.println("Lot number: " + lotNumber +
-//                 " does not exist.");
-//             return null;
-//         }
-//     }
+    
     public Lot getLot(int lotNumber)
     {
         if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
