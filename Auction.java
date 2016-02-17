@@ -92,6 +92,22 @@ public class Auction
     }
     
     /**
+     * devuelva una colección de todos los items por los que no habido ninguna puja en este momento; este método
+     * no debe imprimir nada por pantalla. ----
+     * ------------------------------------------------------------------------------------------------------ 0061
+     */
+    public ArrayList getUnslod(){
+        ArrayList<Lot> noSubastado = new ArrayList<>();
+        for(Lot lot : lots){
+            if(lot.getHighestBid() == null ){
+                noSubastado.add(lot) ;
+            }
+        }
+        return noSubastado;
+    }
+
+    
+    /**
      * Return the lot with the given number. Return null
      * if a lot with this number does not exist.
      * @param lotNumber The number of the lot to return.
