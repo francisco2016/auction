@@ -83,7 +83,7 @@ public class Lot
     }
 
     /**
-     * @return The highest bid for this lot.
+     * @return The highest bid for this lot. --------La puja más alta para este lote.
      *         This could be null if there is
      *         no current bid.
      */

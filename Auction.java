@@ -45,7 +45,7 @@ public class Auction
     }
 
     /**
-     * Make a bid for a lot.
+     * Make a bid for a lot.------------------------------------------------------------------------------ 0059
      * A message is printed indicating whether the bid is
      * successful or not.
      * 
@@ -53,26 +53,7 @@ public class Auction
      * @param bidder The person bidding for the lot.
      * @param value  The value of the bid.
      */
-    //     public void makeABid(int lotNumber, Person bidder, long value)
-    //     {
-    //         Lot selectedLot = getLot(lotNumber);
-    //         if(selectedLot != null) {
-    //             Bid bid = new Bid(bidder, value);
-    //             boolean successful = selectedLot.bidFor(bid);
-    //             if(successful) {
-    //                 System.out.println("The bid for lot number " +
-    //                                    lotNumber + " was successful.");
-    //             }
-    //             else {
-    //                 // Report which bid is higher.
-    //                 Bid highestBid = selectedLot.getHighestBid();
-    //                 System.out.println("Lot number: " + lotNumber +
-    //                                    " already has a bid of: " +
-    //                                    highestBid.getValue());
-    //             }
-    //         }
-    //     }
-    public void makeABid(int lotNumber, Person bidder, long value)
+    public void makeABid(int lotNumber, Person bidder, long value)//--------------------------------- 0059
     {
         Lot selectedLot = getLot(lotNumber);
         if(selectedLot != null) {
@@ -91,7 +72,25 @@ public class Auction
             }
         }
     }
-
+    
+    /**
+     * Este método   muestrar por pantalla los detalles de todos los items que se estén subastando actualmente. 
+     * De aquellos por los que haya habido pujas se debe indicar el nombre de la persona que ha hecho la puja más alta
+     * y el valor de dicha puja; del resto debe indicar que no ha habido pujas.-------------------------- 0060
+     * -----------------------------------------------------------------------------------------   0060
+     */
+    public void close(){
+        for(Lot lot : lots){
+            System.out.println(lot);//la cl. Lot tiene el mt toString(); por lo que java imprime, los datos, incocando
+                                            // a este mt, sobre la VL lot en la que hemos almacenado ,,,,,,,
+            if(lot.getHighestBid() != null){
+                System.out.println("Puja más alta, hecha por: " +lot.getHighestBid().getBidder().getName());
+                System.out.println("Con un valor de: " +lot.getHighestBid().getValue());
+            }
+            
+        }
+    }
+    
     /**
      * Return the lot with the given number. Return null
      * if a lot with this number does not exist.
