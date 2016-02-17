@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A simple model of an auction.
@@ -57,22 +58,22 @@ public class Auction
     {
         Lot selectedLot = getLot(lotNumber);
         if(selectedLot != null) {
-          
+
             boolean successful = selectedLot.bidFor(new Bid(bidder, value));
             if(successful) {
                 System.out.println("The bid for lot number " +
-                                   lotNumber + " was successful.");
+                    lotNumber + " was successful.");
             }
             else {
                 // Report which bid is higher.
 
                 System.out.println("Lot number: " + lotNumber +
-                                   " already has a bid of: " +
-                                   selectedLot.getHighestBid().getValue());
+                    " already has a bid of: " +
+                    selectedLot.getHighestBid().getValue());
             }
         }
     }
-    
+
     /**
      * Este método   muestrar por pantalla los detalles de todos los items que se estén subastando actualmente. 
      * De aquellos por los que haya habido pujas se debe indicar el nombre de la persona que ha hecho la puja más alta
@@ -82,21 +83,21 @@ public class Auction
     public void close(){
         for(Lot lot : lots){
             System.out.println(lot);//la cl. Lot tiene el mt toString(); por lo que java imprime, los datos, incocando
-                                            // a este mt, sobre la VL lot en la que hemos almacenado ,,,,,,,
+            // a este mt, sobre la VL lot en la que hemos almacenado ,,,,,,,
             if(lot.getHighestBid() != null){
                 System.out.println("Puja más alta, hecha por: " +lot.getHighestBid().getBidder().getName());
                 System.out.println("Con un valor de: " +lot.getHighestBid().getValue());
             }
-            
+
         }
     }
-    
+
     /**
      * devuelva una colección de todos los items por los que no habido ninguna puja en este momento; este método
      * no debe imprimir nada por pantalla. ----
      * ------------------------------------------------------------------------------------------------------ 0061
      */
-    public ArrayList getUnslod(){
+    public ArrayList<Lot> getUnslod(){
         ArrayList<Lot> noSubastado = new ArrayList<>();
         for(Lot lot : lots){
             if(lot.getHighestBid() == null ){
@@ -106,17 +107,64 @@ public class Auction
         return noSubastado;
     }
 
-    
     /**
-     * Return the lot with the given number. Return null
-     * if a lot with this number does not exist.
-     * @param lotNumber The number of the lot to return.
+     * recibe como parámetro un entero que represente el número identificador de un item y elimina dicho item de
+     * la colección de items.  -------------------------------------------------------------------------- 0062
+     * No se puede asumir que un item n estará en la posición n-1 por la posibilidad de que haya borrado de elementos. 
+     * Este método debe devolver el elemento eliminado o null en caso de que dicho elemento no exista.
+     * --------------------------------------------------------------------------------------------------  0062
      */
+    /**
+     * Metodo que eliminara un objeto de la subasta
+     */
+    public Lot removeLot(int number){
+        Lot lot = getLot(number);
+        if(lot != null) {
+            lots.remove(lot);
+        }
+        return lot;
+    }
+   
+
+//     /**
+//      * Return the lot with the given number. Return null
+//      * if a lot with this number does not exist.
+//      * @param lotNumber The number of the lot to return.
+//      */
+//     public Lot getLot(int lotNumber)
+//     {
+//         if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
+//             // The number seems to be reasonable.-------------------El número parece ser razonable
+//             Lot selectedLot = lots.get(lotNumber - 1);
+//             // Include a confidence check to be sure we have the
+//             // right lot.
+//             if(selectedLot.getNumber() != lotNumber) {
+//                 System.out.println("Internal error: Lot number " +
+//                     selectedLot.getNumber() +
+//                     " was returned instead of " +
+//                     lotNumber);
+//                 // Don't return an invalid lot.
+//                 selectedLot = null;
+//             }
+//             return selectedLot;
+//         }
+//         else {
+//             System.out.println("Lot number: " + lotNumber +
+//                 " does not exist.");
+//             return null;
+//         }
+//     }
     public Lot getLot(int lotNumber)
     {
         if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
             // The number seems to be reasonable.
-            Lot selectedLot = lots.get(lotNumber - 1);
+            Lot selectedLot = null;
+            if(lotNumber > 1){
+                selectedLot = lots.get(lotNumber - (lots.size() - 1));
+            }
+            else{
+                selectedLot = lots.get(lotNumber - 1);
+            }
             // Include a confidence check to be sure we have the
             // right lot.
             if(selectedLot.getNumber() != lotNumber) {
@@ -135,4 +183,5 @@ public class Auction
             return null;
         }
     }
+    
 }
